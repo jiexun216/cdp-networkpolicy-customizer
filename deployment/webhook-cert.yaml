@@ -1,0 +1,26 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cdp-networkpolicy-customizer-webhook-cert
+  namespace: cdp-customizer
+spec:
+  secretName: cdp-networkpolicy-customizer-admission-manager-certs
+  subject:
+    organizations:
+    - dce
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+    - client auth
+  dnsNames:
+  - cdp-networkpolicy-customizer-admission-manager
+  - cdp-networkpolicy-customizer-admission-manager.cdp-customizer
+  - cdp-networkpolicy-customizer-admission-manager.cdp-customizer.svc
+  - cdp-networkpolicy-customizer-admission-manager.cdp-customizer.svc.cluster.local
+  ipAddresses:
+  - 127.0.0.1
+  issuerRef:
+    name: k8s-ca-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
